@@ -1,0 +1,134 @@
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #FAFAFA;
+    /* Very light gray/white background */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.auth-logo-wrapper {
+    text-align: center;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.auth-brand {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    margin: 0.5rem 0 0 0;
+    color: #1A1A1A;
+}
+
+.auth-card {
+    background: #FFFFFF;
+    width: 100%;
+    max-width: 400px;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+}
+
+.auth-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.auth-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1A1A1A;
+}
+
+.auth-toggle-btn {
+    background: none;
+    border: none;
+    color: #4361EE;
+    /* Vibrant blue from the screenshot */
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #4A4A4A;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.role-select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+.form-group input:focus,
+.role-select:focus {
+    border-color: #4361EE;
+}
+
+.auth-submit-btn {
+    width: 100%;
+    background-color: #4361EE;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    /* Pill shape */
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background-color 0.2s;
+}
+
+.auth-submit-btn:hover {
+    background-color: #3651D4;
+}
+
+.auth-footer-links {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+.forgot-password {
+    color: #A0A0A0;
+    text-decoration: none;
+    font-size: 0.85rem;
+}
+
+.auth-legal {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 3rem;
+    font-size: 0.8rem;
+    color: #A0A0A0;
+}
+
+.auth-legal a {
+    color: #A0A0A0;
+    text-decoration: none;
+    margin-left: 1rem;
+}
