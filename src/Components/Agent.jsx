@@ -1,37 +1,78 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/dashboard.css';
 
 const AgentDashboard = () => {
-
-    const [myFields, setMyFields] = useState([
-        { id: 1, name: 'North Plot A', crop: 'Maize', plantedDate: '2026-03-10', stage: 'Growing', status: 'Active' },
-        { id: 3, name: 'East Greenhouse', crop: 'Tomatoes', plantedDate: '2026-01-15', stage: 'Harvested', status: 'Completed' },
-    ]);
-
+    const navigate = useNavigate();
+    const [myFields, setMyFields] = useState([]);
     const [updateStages, setUpdateStages] = useState({});
+    
+    // Convert to number for comparison since MySQL returns IDs as numbers
+    const userId = Number(localStorage.getItem('userId'));
+
+    const fetchMyFields = () => {
+        fetch('http://localhost:5000/api/fields')
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data)) {
+                    // Filter fields to match the logged in agent!
+                    const filtered = data.filter(f => f.agent_id === userId);
+                    setMyFields(filtered);
+                }
+            })
+            .catch(err => console.error("Error fetching agent fields:", err));
+    };
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            navigate('/auth');
+            return;
+        }
+        fetchMyFields();
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('userRole');
+        localStorage.removeItem('userId');
+        navigate('/auth');
+    };
 
     const handleStageChange = (id, newStage) => {
         setUpdateStages({ ...updateStages, [id]: newStage });
     };
 
-    const submitUpdate = (id) => {
+    const submitUpdate = async (id) => {
         const newStage = updateStages[id];
         if (!newStage) return;
 
+        const newStatus = newStage === 'Harvested' ? 'Completed' : 'Active';
 
-        console.log(`Updating field ${id} to stage: ${newStage}`);
+        try {
+            const res = await fetch(`http://localhost:5000/api/fields/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ stage: newStage, status: newStatus })
+            });
 
-
-        setMyFields(myFields.map(field =>
-            field.id === id ? { ...field, stage: newStage, status: newStage === 'Harvested' ? 'Completed' : 'Active' } : field
-        ));
+            if (res.ok) {
+                // Clear the dropdown selection and refetch fields to show updated native DB data!
+                setUpdateStages({ ...updateStages, [id]: '' });
+                fetchMyFields();
+            } else {
+                console.error("Failed to update field status.");
+            }
+        } catch (error) {
+            console.error("Error submitting update:", error);
+        }
     };
 
     return (
         <div className="dashboard-container">
             <header className="dashboard-header">
                 <h1>My Assignments</h1>
-                <button className="logout-btn">Log Out</button>
+                <button className="logout-btn" onClick={handleLogout}>Log Out</button>
             </header>
 
             <div className="stats-grid">
@@ -57,7 +98,13 @@ const AgentDashboard = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {myFields.map(field => (
+                        {myFields.length === 0 ? (
+                            <tr>
+                                <td colSpan="5" style={{ textAlign: 'center', padding: '2rem', color: '#666' }}>
+                                    No fields assigned yet. When your Coordinator assigns you a field, it will appear here.
+                                </td>
+                            </tr>
+                        ) : myFields.map(field => (
                             <tr key={field.id}>
                                 <td><strong>{field.name}</strong><br /><small>Planted: {field.plantedDate}</small></td>
                                 <td>{field.crop}</td>
@@ -72,8 +119,8 @@ const AgentDashboard = () => {
                                         <div style={{ display: 'flex', alignItems: 'center' }}>
                                             <select
                                                 className="update-select"
+                                                value={updateStages[field.id] || ""}
                                                 onChange={(e) => handleStageChange(field.id, e.target.value)}
-                                                defaultValue=""
                                             >
                                                 <option value="" disabled>Select new stage...</option>
                                                 <option value="Planted">Planted</option>
