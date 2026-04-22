@@ -10,7 +10,7 @@ const AdminDashboard = () => {
     const [newField, setNewField] = useState({ name: '', crop: '', agent_id: '' });
 
     const fetchFields = () => {
-        fetch('http://localhost:5000/api/fields')
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/api/fields`)
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) setFields(data);
@@ -27,7 +27,7 @@ const AdminDashboard = () => {
         }
 
         fetchFields();
-        fetch('http://localhost:5000/api/agents')
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/api/agents`)
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) setAgents(data);
@@ -44,7 +44,7 @@ const AdminDashboard = () => {
     const handleAddField = async (e) => {
         e.preventDefault();
         try {
-            const res = await fetch('http://localhost:5000/api/fields', {
+            const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/fields`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newField)

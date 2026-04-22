@@ -26,7 +26,8 @@ const Auth = () => {
         e.preventDefault();
         setErrorMsg('');
 
-        const url = isLogin ? 'http://localhost:5000/api/login' : 'http://localhost:5000/api/register';
+        const API_BASE = import.meta.env.VITE_API_BASE_URL;
+        const url = isLogin ? `${API_BASE}/api/login` : `${API_BASE}/api/register`;
 
         try {
             const res = await fetch(url, {

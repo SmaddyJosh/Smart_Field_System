@@ -11,7 +11,7 @@ const AgentDashboard = () => {
     const userId = Number(localStorage.getItem('userId'));
 
     const fetchMyFields = () => {
-        fetch('http://localhost:5000/api/fields')
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/api/fields`)
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) {
@@ -50,7 +50,7 @@ const AgentDashboard = () => {
         const newStatus = newStage === 'Harvested' ? 'Completed' : 'Active';
 
         try {
-            const res = await fetch(`http://localhost:5000/api/fields/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/fields/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ stage: newStage, status: newStatus })
