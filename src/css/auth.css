@@ -5,7 +5,7 @@
     justify-content: center;
     min-height: 100vh;
     background-color: #FAFAFA;
-    /* Very light gray/white background */
+
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
@@ -52,7 +52,7 @@
     background: none;
     border: none;
     color: #4361EE;
-    /* Vibrant blue from the screenshot */
+
     font-weight: 500;
     cursor: pointer;
     font-size: 0.95rem;
@@ -77,6 +77,8 @@
     border: 1px solid #E0E0E0;
     border-radius: 8px;
     font-size: 1rem;
+    background-color: #FFFFFF;
+    color: #1A1A1A;
     box-sizing: border-box;
     transition: border-color 0.2s;
     outline: none;
@@ -93,7 +95,7 @@
     color: white;
     border: none;
     border-radius: 30px;
-    /* Pill shape */
+
     padding: 1rem;
     font-size: 1rem;
     font-weight: 600;

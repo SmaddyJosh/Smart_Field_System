@@ -1,13 +1,13 @@
-/* App.css - Global Styles & Resets */
 
-/* 1. Global Reset: Forces all elements to calculate width/height consistently */
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* 2. Base Typography & Background */
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -16,24 +16,24 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #F8F9FA;
-  /* Matches our light gray theme */
+
   color: #1A1A1A;
 }
 
-/* 3. The Main App Container */
+
 .App {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* 4. Global Link Styling */
+
 a {
   text-decoration: none;
   color: inherit;
 }
 
-/* 5. Smooth Scrolling (Nice touch for the Home page anchor links) */
+
 html {
   scroll-behavior: smooth;
 }

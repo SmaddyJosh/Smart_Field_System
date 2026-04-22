@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Home = () => {
     return (
         <div className="home-container">
-            {/* Navigation Bar */}
+
             <nav className="navbar">
                 <div className="nav-brand">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -22,13 +22,13 @@ const Home = () => {
                 </ul>
 
                 <div className="nav-actions">
-                    {/* Replace standard <a> tags with React Router <Link to="/auth"> if routing is set up */}
+
                     <a href="/auth" className="nav-login">Log In</a>
                     <a href="/auth" className="nav-register-btn">Get Started</a>
                 </div>
             </nav>
 
-            {/* Hero Section */}
+
             <main className="hero-section">
                 <div className="hero-content">
                     <h1 className="hero-title">
@@ -44,9 +44,9 @@ const Home = () => {
                 </div>
 
                 <div className="hero-image-container">
-                    {/* Placeholder for your actual farming/app dashboard image */}
+
                     <div className="image-placeholder">
-                        <span role="img" aria-label="tractor">🚜</span>
+                        <span role="img" aria-label="tractor"></span>
                     </div>
                 </div>
             </main>

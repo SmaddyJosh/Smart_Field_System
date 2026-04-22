@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/auth.css';
 
 const Auth = () => {
+    const navigate = useNavigate();
     const [isLogin, setIsLogin] = useState(true);
     const [formData, setFormData] = useState({
         email: '',
         password: '',
-        role: 'agent' // Default role for registration
+        role: 'agent'
     });
 
     const toggleAuthMode = () => {
@@ -20,13 +22,19 @@ const Auth = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(isLogin ? "Logging in..." : "Registering...", formData);
-        // Add your API call here
+
+
+        if (formData.role === 'agent' && !isLogin) {
+            navigate('/agent');
+        } else {
+            navigate('/admin');
+        }
     };
 
     return (
         <div className="auth-container">
             <div className="auth-logo-wrapper">
-                {/* Simple SVG Sprout/Farm Logo */}
+
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M12 22v-6" /><path d="M12 8V2" /><path d="M4 10a8 8 0 0 1 16 0" />
                 </svg>

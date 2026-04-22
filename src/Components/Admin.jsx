@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/dashboard.css';
 
 const AdminDashboard = () => {
-    // Mock data - replace with a fetch call to your backend later
-    const [fields] = useState([
-        { id: 1, name: 'North Plot A', crop: 'Maize', agent: 'John Doe', stage: 'Growing', status: 'Active' },
-        { id: 2, name: 'South Valley', crop: 'Wheat', agent: 'Jane Smith', stage: 'Planted', status: 'At Risk' },
-        { id: 3, name: 'East Greenhouse', crop: 'Tomatoes', agent: 'John Doe', stage: 'Harvested', status: 'Completed' },
-    ]);
+    const [fields, setFields] = useState([]);
 
-    // Calculate summaries dynamically
+    useEffect(() => {
+
+        fetch('http://localhost:5000/api/fields')
+            .then(res => res.json())
+            .then(data => {
+
+                if (Array.isArray(data)) {
+                    setFields(data);
+                } else {
+                    console.error("Backend returned an error instead of an array:", data);
+                }
+            })
+            .catch(err => console.error('Error fetching fields:', err));
+    }, []);
+
+
     const totalFields = fields.length;
     const activeFields = fields.filter(f => f.status === 'Active').length;
     const riskFields = fields.filter(f => f.status === 'At Risk').length;
@@ -22,7 +32,7 @@ const AdminDashboard = () => {
                 <button className="logout-btn">Log Out</button>
             </header>
 
-            {/* Summary Cards */}
+
             <div className="stats-grid">
                 <div className="stat-card">
                     <div className="stat-title">Total Fields</div>
@@ -42,7 +52,7 @@ const AdminDashboard = () => {
                 </div>
             </div>
 
-            {/* Fields Data Table */}
+
             <div className="dashboard-header" style={{ marginTop: '2rem' }}>
                 <h2>All Fields</h2>
                 <button className="primary-btn">+ Add New Field</button>

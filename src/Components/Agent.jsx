@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../css/dashboard.css';
 
 const AgentDashboard = () => {
-    // Mock data for a specific agent
+
     const [myFields, setMyFields] = useState([
         { id: 1, name: 'North Plot A', crop: 'Maize', plantedDate: '2026-03-10', stage: 'Growing', status: 'Active' },
         { id: 3, name: 'East Greenhouse', crop: 'Tomatoes', plantedDate: '2026-01-15', stage: 'Harvested', status: 'Completed' },
@@ -18,10 +18,10 @@ const AgentDashboard = () => {
         const newStage = updateStages[id];
         if (!newStage) return;
 
-        // Here you would make a PUT/PATCH request to your API
+
         console.log(`Updating field ${id} to stage: ${newStage}`);
 
-        // Optimistic UI update
+
         setMyFields(myFields.map(field =>
             field.id === id ? { ...field, stage: newStage, status: newStage === 'Harvested' ? 'Completed' : 'Active' } : field
         ));
