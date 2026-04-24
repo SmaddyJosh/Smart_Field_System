@@ -1,6 +1,7 @@
 import React from 'react';
 import '../css/home.css';
 import { Link } from 'react-router-dom';
+import heroImg from '../assets/hero.png';
 
 const Home = () => {
     return (
@@ -44,10 +45,14 @@ const Home = () => {
                 </div>
 
                 <div className="hero-image-container">
-
-                    <div className="image-placeholder">
-                        <span role="img" aria-label="tractor"></span>
-                    </div>
+                    <img
+                        src={heroImg}
+                        alt="Smart Field Tractor Analysis"
+                        className="hero-image"
+                        style={{ width: '100%', height: 'auto', borderRadius: '16px', boxShadow: '0 20px 50px rgba(46, 125, 50, 0.2)', transition: 'all 0.3s ease' }}
+                        onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-8px)'; e.currentTarget.style.boxShadow = '0 25px 60px rgba(46, 125, 50, 0.35)' }}
+                        onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 20px 50px rgba(46, 125, 50, 0.2)' }}
+                    />
                 </div>
             </main>
         </div>
