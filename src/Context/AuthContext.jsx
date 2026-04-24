@@ -6,6 +6,7 @@ const Auth = () => {
     const navigate = useNavigate();
     const [isLogin, setIsLogin] = useState(true);
     const [errorMsg, setErrorMsg] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -25,6 +26,7 @@ const Auth = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrorMsg('');
+        setIsLoading(true);
 
         const API_BASE = import.meta.env.VITE_API_BASE_URL;
         const url = isLogin ? `${API_BASE}/api/login` : `${API_BASE}/api/register`;
@@ -60,6 +62,8 @@ const Auth = () => {
         } catch (error) {
             console.error("Auth error:", error);
             setErrorMsg('Unable to connect to the server.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -128,8 +132,10 @@ const Auth = () => {
                         </div>
                     )}
 
-                    <button type="submit" className="auth-submit-btn">
-                        {isLogin ? 'Log In' : 'Sign Up'}
+                    <button type="submit" className="auth-submit-btn" disabled={isLoading} style={isLoading ? { opacity: 0.7, cursor: 'not-allowed' } : {}}>
+                        {isLoading 
+                            ? (isLogin ? 'Logging In (Waking Server)...' : 'Creating Account (Waking Server)...') 
+                            : (isLogin ? 'Log In' : 'Sign Up')}
                     </button>
                 </form>
 
